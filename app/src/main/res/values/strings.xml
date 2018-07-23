@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">KiloKonverter</string>
+    <string name="kilograms">Kilos to Pounds</string>
+    <string name="pounds">Pounds to Kilos</string>
+    <string name="enter_weight">Enter weight</string>
+    <string name="convert_button">Convert</string>
+    <string name="change_weights">Configure Weights</string>
+    <string name="weight_sets">weight_sets</string>
+    <string name="barbell">Barbells</string>
+    <string name="chooseWeights">Choose Weights</string>
+    <string name="pickBarbell">Pick Barbell</string>
+    <string name="title_activity_configure">ConfigureActivity</string>
+    <string name="addButton">Add</string>
+    <string name="confirmDelete">Delete weight?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+</resources>
