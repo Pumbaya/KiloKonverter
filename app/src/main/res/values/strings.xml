@@ -5,6 +5,7 @@
     <string name="enter_weight">Enter weight</string>
     <string name="convert_button">Convert</string>
     <string name="change_weights">Configure Weights</string>
+    <string name="wilks_calculator">Wilks Calculator</string>
     <string name="weight_sets">weight_sets</string>
     <string name="barbell">Barbells</string>
     <string name="chooseWeights">Choose Weights</string>
@@ -14,4 +15,15 @@
     <string name="confirmDelete">Delete weight?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="kilo_barbell">Kilo Barbell</string>
+    <string name="kilo_weight">Kilo Weight</string>
+    <string name="pound_barbell">Pound Barbell</string>
+    <string name="pound_weight">Pound Weight</string>
+    <string name="kg">KG</string>
+    <string name="lb">LB</string>
+    <string name="units">Units</string>
+    <string name="sex">Sex</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="calculate">Calculate</string>
 </resources>

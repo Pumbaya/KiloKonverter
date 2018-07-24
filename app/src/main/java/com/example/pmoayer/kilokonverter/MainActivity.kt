@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.*
 import android.widget.CheckBox
 import android.widget.RadioButton
@@ -20,6 +21,10 @@ class MainActivity : BaseCompatActivity() {
     private lateinit var viewManager: RecyclerView.LayoutManager
     private var activeSet = ArrayList<Weight>()
     private var activeBar = Weight(0.00, "barbell", true)
+    private lateinit var kiloSet: ArrayList<Weight>
+    private lateinit var kiloBars: ArrayList<Weight>
+    private lateinit var poundSet: ArrayList<Weight>
+    private lateinit var poundBars: ArrayList<Weight>
     private lateinit var activeBarRadio : RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +39,10 @@ class MainActivity : BaseCompatActivity() {
         //Get user's weight sets and barbell configuration
         val weightSets = Utils.verifyOrCreateSets(this)
         val barbellSets = Utils.verifyOrCreateBarbells(this)
-        val kiloSet = weightSets.first
-        val kiloBars = barbellSets.first
-        val poundSet = weightSets.second
-        val poundBars = barbellSets.second
+        kiloSet = weightSets.first
+        kiloBars = barbellSets.first
+        poundSet = weightSets.second
+        poundBars = barbellSets.second
 
         //Programmatically create both Kilo and Pound Barbell Radio Groups
         setupBarbellRadio(kiloBars, kilo_barbell_buttons, this)
@@ -73,7 +78,7 @@ class MainActivity : BaseCompatActivity() {
         }
 
         //Recycler View setup for weight set
-        viewManager = GridLayoutManager(this.applicationContext, 4)
+        viewManager = GridLayoutManager(this, 4)
         viewAdapter = WeightAdapter(activeSet)
         recyclerView = weightset_recycler_view.apply {
             layoutManager = viewManager
@@ -85,36 +90,74 @@ class MainActivity : BaseCompatActivity() {
         unitsRadioGroup.check(R.id.kiloButton)
 
         convertButton.setOnClickListener {
-            val weight: Double = inputWeight.text.toString().toDouble()
-            val frequencyMap: HashMap<Weight, Int>
-            val conversion: String
-            var tmp: Triple<Double, Weight, HashMap<Weight, Int>>
+            if (!TextUtils.isEmpty(inputLiftedWeight.text)) {
+                val weight: Double = inputLiftedWeight.text.toString().toDouble()
+                val frequencyMap: HashMap<Weight, Int>
+                val conversion: String
+                var tmp: Triple<Double, Weight, HashMap<Weight, Int>>
 
-            if (unitsRadioGroup.checkedRadioButtonId == kiloButton.id) {
-                val barbellRadioButton = pound_barbell_buttons.findViewById<RadioButton>(pound_barbell_buttons.checkedRadioButtonId)
-                activeBar = poundBars[pound_barbell_buttons.indexOfChild(barbellRadioButton)]
-                tmp = Utils.kilogramsToPounds(weight, activeSet, activeBar, this)
-                conversion = "%.3f".format(tmp.first) + " lbs"
-            } else {
-                val barbellRadioButton = kilo_barbell_buttons.findViewById<RadioButton>(kilo_barbell_buttons.checkedRadioButtonId)
-                activeBar = kiloBars[kilo_barbell_buttons.indexOfChild(barbellRadioButton)]
-                tmp = Utils.poundsToKilograms(weight, activeSet, activeBar, this)
-                conversion = "%.3f".format(tmp.first) + " kgs"
-            }
-            displayConvertedWeight.text = conversion
-            val barbell = tmp.second
-            frequencyMap = tmp.third
+                if (unitsRadioGroup.checkedRadioButtonId == kiloButton.id) {
+                    val barbellRadioButton = pound_barbell_buttons.findViewById<RadioButton>(pound_barbell_buttons.checkedRadioButtonId)
+                    activeBar = poundBars[pound_barbell_buttons.indexOfChild(barbellRadioButton)]
+                    tmp = Utils.kilogramsToPounds(weight, activeSet, activeBar, this)
+                    conversion = "%.3f".format(tmp.first) + " lbs"
+                } else {
+                    val barbellRadioButton = kilo_barbell_buttons.findViewById<RadioButton>(kilo_barbell_buttons.checkedRadioButtonId)
+                    activeBar = kiloBars[kilo_barbell_buttons.indexOfChild(barbellRadioButton)]
+                    tmp = Utils.poundsToKilograms(weight, activeSet, activeBar, this)
+                    conversion = "%.3f".format(tmp.first) + " kgs"
+                }
+                displayConvertedWeight.text = conversion
+                val barbell = tmp.second
+                frequencyMap = tmp.third
 
-            var entries = frequencyMap.entries
-            var frequencyString = barbell.weight.toString() + " barbell\n"
-            for ((key, value) in entries.sortedByDescending { it.key.weight }) {
-                if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
+                var entries = frequencyMap.entries
+                var frequencyString = barbell.weight.toString() + " barbell\n"
+                for ((key, value) in entries.sortedByDescending { it.key.weight }) {
+                    if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
+                }
+                displayFrequencies.text = frequencyString.dropLast(2)
             }
-            displayFrequencies.text = frequencyString.dropLast(2)
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        Utils.saveListToPref("kilograms", kiloSet, this)
+        Utils.saveListToPref("kiloBarbells", kiloBars, this)
+        Utils.saveListToPref("pounds", poundSet, this)
+        Utils.saveListToPref("poundBarbells", poundBars, this)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        //Get user's weight sets and barbell configuration
+        val weightSets = Utils.verifyOrCreateSets(this)
+        val barbellSets = Utils.verifyOrCreateBarbells(this)
+        kiloSet = weightSets.first
+        kiloBars = barbellSets.first
+        poundSet = weightSets.second
+        poundBars = barbellSets.second
+
+        //Re-create active set
+        activeSet.clear()
+        if (unitsRadioGroup.checkedRadioButtonId == kiloButton.id){
+            activeSet.addAll(poundSet)
+            val barbellRadioButton = pound_barbell_buttons.findViewById<RadioButton>(pound_barbell_buttons.checkedRadioButtonId)
+            activeBar = poundBars[pound_barbell_buttons.indexOfChild(barbellRadioButton)]
+        } else {
+            activeSet.addAll(kiloSet)
+            val barbellRadioButton = kilo_barbell_buttons.findViewById<RadioButton>(kilo_barbell_buttons.checkedRadioButtonId)
+            activeBar = kiloBars[kilo_barbell_buttons.indexOfChild(barbellRadioButton)]
+        }
+
+        //Re-create barbell radio groups
+        kilo_barbell_buttons.removeAllViewsInLayout()
+        pound_barbell_buttons.removeAllViewsInLayout()
+        setupBarbellRadio(kiloBars, kilo_barbell_buttons, this)
+        setupBarbellRadio(poundBars, pound_barbell_buttons, this)
+        viewAdapter.notifyDataSetChanged()
+    }
 
     class WeightAdapter(private val weightSet: ArrayList<Weight>) : RecyclerView.Adapter<WeightAdapter.ViewHolder>() {
 

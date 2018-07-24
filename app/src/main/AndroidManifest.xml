@@ -20,6 +20,10 @@
             android:name=".ConfigureActivity"
             android:label="@string/title_activity_configure"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".WilksActivity"
+            android:label="WilksActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -145,4 +145,13 @@ object Utils {
         var poundBarbells : ArrayList<Weight> = gson.fromJson(poundStr, listType)
         return Pair(kiloBarbells, poundBarbells)
     }
+
+    fun saveListToPref(key : String, list : ArrayList<Weight>, context : Context) {
+        var sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        var sharedPrefEditor = sharedPref.edit()
+        var gson = Gson()
+        val listGson = gson.toJson(list)
+        sharedPrefEditor.putString(key, listGson)
+        sharedPrefEditor.commit()
+    }
 }

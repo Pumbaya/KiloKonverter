@@ -7,13 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/NoActionBarTheme"
+    android:orientation="vertical"
     tools:context=".ConfigureActivity">
 
-    <include  layout="@layout/my_toolbar"/>
+    <include layout="@layout/my_toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -23,89 +24,173 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/addBarbell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addButton"
-                app:layout_constraintBaseline_toBaselineOf="@+id/inputBarbell"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/inputBarbell" />
-
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/addButton"
-                app:layout_constraintBaseline_toBaselineOf="@+id/inputWeight"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/inputWeight" />
-
             <EditText
-                android:id="@+id/inputBarbell"
+                android:id="@+id/inputPoundWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:ems="10"
-                android:hint="@string/enter_weight"
+                android:hint="@string/pound_weight"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toStartOf="@+id/convertButton"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/poundBarbell_recycler_view" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/barbell_recycler_view"
+                android:id="@+id/poundBarbell_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputBarbell">
+                app:layout_constraintTop_toBottomOf="@+id/inputPoundBarbell">
 
             </android.support.v7.widget.RecyclerView>
 
             <EditText
-                android:id="@+id/inputWeight"
+                android:id="@+id/inputPoundBarbell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/pound_barbell"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toStartOf="@+id/convertButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kiloWeight_recycler_view" />
+
+            <Button
+                android:id="@+id/addKiloBarbellButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addButton"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inputKiloBarbell"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/inputKiloBarbell" />
+
+            <Button
+                android:id="@+id/addKiloWeightButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addButton"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inputKiloWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/inputKiloWeight" />
+
+            <EditText
+                android:id="@+id/inputKiloBarbell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="@string/enter_weight"
+                android:hint="@string/kilo_barbell"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toStartOf="@+id/convertButton"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/barbell_recycler_view" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/weightSet_recycler_view"
+                android:id="@+id/kiloBarbell_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:scrollbars="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputWeight">
+                app:layout_constraintTop_toBottomOf="@+id/inputKiloBarbell">
 
             </android.support.v7.widget.RecyclerView>
+
+            <EditText
+                android:id="@+id/inputKiloWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:hint="@string/kilo_weight"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toStartOf="@+id/convertButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kiloBarbell_recycler_view" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/kiloWeight_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:scrollbars="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputKiloWeight">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/addPoundBarbellButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/addButton"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inputPoundBarbell"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/inputPoundBarbell" />
+
+            <Button
+                android:id="@+id/addPoundWeightButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/addButton"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inputPoundWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/inputPoundWeight" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/poundWeight_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:scrollbars="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputPoundWeight" />
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </LinearLayout>

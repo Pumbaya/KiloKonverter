@@ -19,6 +19,10 @@ open class BaseCompatActivity : AppCompatActivity() {
                 startActivity(Intent(this, ConfigureActivity::class.java))
                 return true
             }
+            R.id.calculateWilks -> {
+                startActivity(Intent(this, WilksActivity::class.java))
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

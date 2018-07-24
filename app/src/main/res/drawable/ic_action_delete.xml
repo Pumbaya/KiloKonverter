@@ -5,9 +5,10 @@
     android:viewportWidth="24.0"
     android:viewportHeight="24.0">
     <group>
-        <!--<path android:name="square"-->
-            <!--android:fillColor="#888888"-->
-            <!--android:pathData="M0,0 L24,0 L24,24 L0,24 z" />-->
+        <path android:name="square"
+            android:strokeColor="#888888"
+            android:strokeWidth="4"
+            android:pathData="M0,0 L24,0 L24,24 L0,24 z" />
         <path
             android:fillColor="#000000"
 
