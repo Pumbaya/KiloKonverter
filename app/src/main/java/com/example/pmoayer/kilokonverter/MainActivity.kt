@@ -2,6 +2,8 @@ package com.example.pmoayer.kilokonverter
 
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.GridLayoutManager
@@ -94,7 +96,7 @@ class MainActivity : BaseCompatActivity() {
                 val weight: Double = inputWeight.text.toString().toDouble()
                 val frequencyMap: HashMap<Weight, Int>
                 val conversion: String
-                var tmp: Triple<Double, Weight, HashMap<Weight, Int>>
+                val tmp: Triple<Double, Weight, HashMap<Weight, Int>>
 
                 if (unitsRadioGroup.checkedRadioButtonId == kiloButton.id) {
                     val barbellRadioButton = pound_barbell_buttons.findViewById<RadioButton>(pound_barbell_buttons.checkedRadioButtonId)
@@ -111,7 +113,7 @@ class MainActivity : BaseCompatActivity() {
                 val barbell = tmp.second
                 frequencyMap = tmp.third
 
-                var entries = frequencyMap.entries
+                val entries = frequencyMap.entries
                 var frequencyString = barbell.weight.toString() + " barbell\n"
                 for ((key, value) in entries.sortedByDescending { it.key.weight }) {
                     if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
@@ -186,7 +188,7 @@ class MainActivity : BaseCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            var weightObj = weightSet[position]
+            val weightObj = weightSet[position]
             holder.checkBox.text = weightObj.weight.toString()
             holder.checkBox.setOnCheckedChangeListener { compoundButton, isChecked ->
                 weightObj.selected = isChecked
@@ -197,10 +199,10 @@ class MainActivity : BaseCompatActivity() {
         override fun getItemCount() = weightSet.size
     }
 
-    fun setupBarbellRadio(barbells : ArrayList<Weight>, group : RadioGroup, context : Context) {
-        var radioButton : RadioButton
+    private fun setupBarbellRadio(barbells : ArrayList<Weight>, group : RadioGroup, context : Context) {
+        var radioButton : android.support.v7.widget.AppCompatRadioButton
         for (barbell in barbells) {
-            radioButton = RadioButton(context)
+            radioButton = android.support.v7.widget.AppCompatRadioButton(context)
             radioButton.text = barbell.weight.toString()
             group.addView(radioButton)
 

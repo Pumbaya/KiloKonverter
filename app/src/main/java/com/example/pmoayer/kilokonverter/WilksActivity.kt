@@ -30,11 +30,10 @@ class WilksActivity : BaseCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wilks)
         setSupportActionBar(my_toolbar)
-        supportActionBar?.title = "Wilks Calculator"
 
         //false == male ... true == female
         calculateButton.setOnClickListener {
-            var gender = sexSwitch.isChecked
+            val gender = sexSwitch.isChecked
             var liftedWeight = inputLiftedWeight.text.toString().toDouble()
             var bodyWeight = inputBodyweight.text.toString().toDouble()
 
@@ -43,7 +42,7 @@ class WilksActivity : BaseCompatActivity() {
                 liftedWeight /= 2.20462
                 bodyWeight /= 2.20462
             }
-            displayResult.text = (calculateWilks(liftedWeight, bodyWeight, gender)).toString()
+            displayResult.text = "%.2f".format(calculateWilks(liftedWeight, bodyWeight, gender))
             Utils.hideKeyboard(this)
         }
     }
@@ -58,4 +57,5 @@ class WilksActivity : BaseCompatActivity() {
             }
             return liftedWeight * (500.0 / tmp)
     }
+
 }

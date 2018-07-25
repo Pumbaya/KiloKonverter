@@ -27,4 +27,8 @@
     <string name="female">Female</string>
     <string name="calculate">Calculate</string>
     <string name="hide">Hide</string>
+    <string name="weight_lifted">Weight Lifted</string>
+    <string name="body_weight">Body Weight</string>
+    <string name="m">M</string>
+    <string name="f">F</string>
 </resources>

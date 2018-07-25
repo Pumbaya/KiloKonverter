@@ -4,12 +4,12 @@
     android:id="@+id/toolbar_menu">
 
     <item android:id="@+id/calculateWilks"
-        android:icon="@drawable/w_abeezee"
+        android:icon="@drawable/w"
         android:title="@string/change_weights"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/configureWeights"
-        android:icon="@drawable/weight_plates"
+        android:icon="@drawable/inverted_weight_plates"
         android:title="@string/change_weights"
         app:showAsAction="ifRoom"/>
 </menu>

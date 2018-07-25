@@ -7,19 +7,12 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Menu
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_configure.*
 import kotlinx.android.synthetic.main.my_toolbar.*
-import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
-import android.content.Context.INPUT_METHOD_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
-import android.app.Activity
-import android.view.inputmethod.InputMethodManager
 
 
 class ConfigureActivity : BaseCompatActivity() {
@@ -39,7 +32,6 @@ class ConfigureActivity : BaseCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configure)
         setSupportActionBar(my_toolbar)
-        supportActionBar?.title = "Weight Configuration"
 
         //Get user's weight sets and barbell configuration
         val weightSets = Utils.verifyOrCreateSets(this)
@@ -91,11 +83,11 @@ class ConfigureActivity : BaseCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            var weightObj = weightSet[position]
+            val weightObj = weightSet[position]
             holder.checkBox.text = weightObj.weight.toString()
 
             holder.checkBox.setOnClickListener {
-                var builder = AlertDialog.Builder(holder.itemView.context)
+                val builder = AlertDialog.Builder(holder.itemView.context)
                 builder.setTitle("Are you sure?")
                 builder.setPositiveButton(R.string.cancel) { dialog, which ->
                     //Do nothing and exit alert dialog
@@ -112,7 +104,7 @@ class ConfigureActivity : BaseCompatActivity() {
         override fun getItemCount() = weightSet.size
     }
 
-    fun initializeRecyclerView(id : Int, set : ArrayList<Weight>) {
+    private fun initializeRecyclerView(id : Int, set : ArrayList<Weight>) {
         viewManager = GridLayoutManager(this, 4)
         viewAdapter = WeightAdapter(set)
         recyclerView = findViewById(id)
@@ -123,7 +115,7 @@ class ConfigureActivity : BaseCompatActivity() {
         }
     }
 
-    fun addWeight(list : ArrayList<Weight>, recyclerView : RecyclerView, textView : TextView) {
+    private fun addWeight(list : ArrayList<Weight>, recyclerView : RecyclerView, textView : TextView) {
         if (TextUtils.isEmpty(textView.text)) {
             Toast.makeText(this,"Please enter weight",Toast.LENGTH_SHORT).show()
             return
@@ -140,6 +132,8 @@ class ConfigureActivity : BaseCompatActivity() {
         list.add(Weight(toAdd, "barbell", true))
         list.sortByDescending{ it.weight }
         recyclerView.adapter?.notifyDataSetChanged()
+        textView.text = ""
+        textView.clearFocus()
         Utils.hideKeyboard(this)
     }
 

@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/NoActionBarTheme"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <include layout="@layout/my_toolbar" />
 
@@ -14,7 +16,6 @@
         android:id="@+id/inputWeight"
         android:layout_width="203dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="100dp"
         android:ems="10"
@@ -113,7 +114,9 @@
         app:layout_constraintBottom_toTopOf="@+id/chooseWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></RadioGroup>
+        app:layout_constraintStart_toStartOf="parent">
+
+    </RadioGroup>
 
     <RadioGroup
         android:id="@+id/pound_barbell_buttons"
@@ -128,7 +131,9 @@
         app:layout_constraintBottom_toTopOf="@+id/chooseWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"></RadioGroup>
+        app:layout_constraintStart_toStartOf="parent">
+
+    </RadioGroup>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weightset_recycler_view"
@@ -143,7 +148,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"></android.support.v7.widget.RecyclerView>
+        app:layout_constraintStart_toStartOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/chooseWeight"
@@ -151,8 +158,6 @@
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="24dp"
         android:text="@string/chooseWeights"
         app:layout_constraintBottom_toTopOf="@+id/weightset_recycler_view"
@@ -165,8 +170,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="24dp"
         android:text="@string/pickBarbell"
         app:layout_constraintBottom_toTopOf="@+id/pound_barbell_buttons"
