@@ -8,7 +8,7 @@
     android:theme="@style/NoActionBarTheme"
     tools:context=".MainActivity">
 
-    <include layout="@layout/my_toolbar"/>
+    <include layout="@layout/my_toolbar" />
 
     <EditText
         android:id="@+id/inputWeight"
@@ -113,8 +113,7 @@
         app:layout_constraintBottom_toTopOf="@+id/chooseWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-    </RadioGroup>
+        app:layout_constraintStart_toStartOf="parent"></RadioGroup>
 
     <RadioGroup
         android:id="@+id/pound_barbell_buttons"
@@ -129,8 +128,7 @@
         app:layout_constraintBottom_toTopOf="@+id/chooseWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-    </RadioGroup>
+        app:layout_constraintStart_toStartOf="parent"></RadioGroup>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weightset_recycler_view"
@@ -145,8 +143,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintStart_toStartOf="parent"></android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/chooseWeight"
@@ -176,5 +173,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/hideBarbells"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/hide"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pickBarbell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toEndOf="@+id/pickBarbell" />
+
+    <TextView
+        android:id="@+id/hideWeights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/hide"
+        app:layout_constraintBaseline_toBaselineOf="@+id/chooseWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toEndOf="@+id/chooseWeight" />
 
 </android.support.constraint.ConstraintLayout>

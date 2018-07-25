@@ -90,8 +90,8 @@ class MainActivity : BaseCompatActivity() {
         unitsRadioGroup.check(R.id.kiloButton)
 
         convertButton.setOnClickListener {
-            if (!TextUtils.isEmpty(inputLiftedWeight.text)) {
-                val weight: Double = inputLiftedWeight.text.toString().toDouble()
+            if (!TextUtils.isEmpty(inputWeight.text)) {
+                val weight: Double = inputWeight.text.toString().toDouble()
                 val frequencyMap: HashMap<Weight, Int>
                 val conversion: String
                 var tmp: Triple<Double, Weight, HashMap<Weight, Int>>
@@ -117,6 +117,23 @@ class MainActivity : BaseCompatActivity() {
                     if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
                 }
                 displayFrequencies.text = frequencyString.dropLast(2)
+                Utils.hideKeyboard(this)
+            }
+        }
+
+        hideBarbells.setOnClickListener {
+            if (activeBarRadio.visibility == View.GONE) {
+                activeBarRadio.visibility = View.VISIBLE
+            } else {
+                activeBarRadio.visibility = View.GONE
+            }
+        }
+
+        hideWeights.setOnClickListener {
+            if (weightset_recycler_view.visibility == View.GONE) {
+                weightset_recycler_view.visibility = View.VISIBLE
+            } else {
+                weightset_recycler_view.visibility = View.GONE
             }
         }
     }

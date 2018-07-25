@@ -7,13 +7,19 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Menu
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_configure.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
+import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.support.v4.content.ContextCompat.getSystemService
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
 
 
 class ConfigureActivity : BaseCompatActivity() {
@@ -26,7 +32,7 @@ class ConfigureActivity : BaseCompatActivity() {
     private lateinit var poundBars: ArrayList<Weight>
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu_configure, menu)
+        menuInflater.inflate(R.menu.toolbar_menu_no_icons, menu)
         return true
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,5 +140,8 @@ class ConfigureActivity : BaseCompatActivity() {
         list.add(Weight(toAdd, "barbell", true))
         list.sortByDescending{ it.weight }
         recyclerView.adapter?.notifyDataSetChanged()
+        Utils.hideKeyboard(this)
     }
+
+
 }

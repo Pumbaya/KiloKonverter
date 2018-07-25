@@ -1,13 +1,26 @@
 package com.example.pmoayer.kilokonverter
 
+import android.app.Activity
 import android.content.Context
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.*
 
 object Utils {
+
+    //Hide the soft input keyboard
+    fun hideKeyboard(activity: Activity) {
+        // Check if no view has focus:
+        val view = activity.currentFocus
+        if (view != null) {
+            val inputManager = activity.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
+    }
+
     fun kilogramsToPounds(weight: Double, weightSet: ArrayList<Weight>, barbell: Weight, context: Context): Triple<Double, Weight, HashMap<Weight, Int>> {
 //        var gson = Gson()
 //        val listType = object : TypeToken<ArrayList<Weight>>(){}.type

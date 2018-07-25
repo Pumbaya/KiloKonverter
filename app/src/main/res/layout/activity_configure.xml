@@ -8,6 +8,8 @@
     android:layout_height="match_parent"
     android:theme="@style/NoActionBarTheme"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ConfigureActivity">
 
     <include layout="@layout/my_toolbar"/>
@@ -26,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <EditText
                 android:id="@+id/inputPoundWeight"
