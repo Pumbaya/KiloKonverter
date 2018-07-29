@@ -93,9 +93,13 @@ class ConfigureActivity : BaseCompatActivity() {
                     //Do nothing and exit alert dialog
                 }
                 builder.setNegativeButton(R.string.delete) { dialog, which ->
-                    weightSet.removeAt(position)
-                    Toast.makeText(holder.itemView.context,"Weight deleted",Toast.LENGTH_SHORT).show()
-                    notifyDataSetChanged()
+                    if (weightSet.get(position).weight == 0.0) {
+                        Toast.makeText(holder.itemView.context,"Cannot delete zero weight",Toast.LENGTH_SHORT).show()
+                    } else {
+                        weightSet.removeAt(position)
+                        Toast.makeText(holder.itemView.context, "Weight deleted", Toast.LENGTH_SHORT).show()
+                        notifyDataSetChanged()
+                    }
                 }
                 builder.show()
             }

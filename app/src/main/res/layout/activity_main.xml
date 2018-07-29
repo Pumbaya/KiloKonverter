@@ -5,10 +5,10 @@
     android:id="@+id/mainConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/NoActionBarTheme"
-    tools:context=".MainActivity"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:theme="@style/NoActionBarTheme"
+    tools:context=".MainActivity">
 
     <include layout="@layout/my_toolbar" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/convertButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/convert_button"
+        android:text="@string/calculate"
         app:layout_constraintBaseline_toBaselineOf="@+id/inputWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -94,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -204,5 +205,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toEndOf="@+id/chooseWeight" />
+
+    <CheckBox
+        android:id="@+id/convertBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="256dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/convert_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/convertButton" />
+
+    <CheckBox
+        android:id="@+id/splitBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/split_button"
+        app:layout_constraintStart_toStartOf="@+id/convertBox"
+        app:layout_constraintTop_toBottomOf="@+id/convertBox" />
+
+    <ImageView
+        android:id="@+id/goatImage"
+        android:layout_width="579dp"
+        android:layout_height="392dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/goat__description"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496"
+        app:srcCompat="@drawable/goat" />
 
 </android.support.constraint.ConstraintLayout>

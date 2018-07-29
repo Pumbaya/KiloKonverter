@@ -13,6 +13,7 @@ import android.view.*
 import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 
@@ -92,10 +93,18 @@ class MainActivity : BaseCompatActivity() {
         unitsRadioGroup.check(R.id.kiloButton)
 
         convertButton.setOnClickListener {
-            if (!TextUtils.isEmpty(inputWeight.text)) {
+            if (TextUtils.isEmpty(inputWeight.text)) {
+                Toast.makeText(this,"Enter weight", Toast.LENGTH_SHORT).show()
+            } else {
+                //Remove old results.
+                displayConvertedWeight.text = ""
+                displayFrequencies.text = ""
+
                 val weight: Double = inputWeight.text.toString().toDouble()
                 val frequencyMap: HashMap<Weight, Int>
                 val conversion: String
+
+                //Holds the returned Triple from the appropriate util conversion method
                 val tmp: Triple<Double, Weight, HashMap<Weight, Int>>
 
                 if (unitsRadioGroup.checkedRadioButtonId == kiloButton.id) {
@@ -109,16 +118,27 @@ class MainActivity : BaseCompatActivity() {
                     tmp = Utils.poundsToKilograms(weight, activeSet, activeBar, this)
                     conversion = "%.3f".format(tmp.first) + " kgs"
                 }
-                displayConvertedWeight.text = conversion
-                val barbell = tmp.second
-                frequencyMap = tmp.third
 
-                val entries = frequencyMap.entries
-                var frequencyString = barbell.weight.toString() + " barbell\n"
-                for ((key, value) in entries.sortedByDescending { it.key.weight }) {
-                    if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
+                if (!convertBox.isChecked && !splitBox.isChecked) {
+                    goatImage.visibility = View.VISIBLE
+                    Toast.makeText(this,"Check \"Convert\" or \"Split\" option to do something", Toast.LENGTH_LONG).show()
+                } else {
+                    goatImage.visibility = View.GONE
+                    if (convertBox.isChecked) {
+                        displayConvertedWeight.text = conversion
+                    }
+
+                    if (splitBox.isChecked) {
+                        val barbell = tmp.second
+                        frequencyMap = tmp.third
+                        val entries = frequencyMap.entries
+                        var frequencyString = barbell.weight.toString() + " barbell\n"
+                        for ((key, value) in entries.sortedByDescending { it.key.weight }) {
+                            if (value != 0) frequencyString += value.toString() + "x" + key.weight + ", "
+                        }
+                        displayFrequencies.text = frequencyString.dropLast(2)
+                    }
                 }
-                displayFrequencies.text = frequencyString.dropLast(2)
                 Utils.hideKeyboard(this)
             }
         }

@@ -1,7 +1,9 @@
 package com.example.pmoayer.kilokonverter
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_wilks.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 import kotlin.math.pow
@@ -33,17 +35,21 @@ class WilksActivity : BaseCompatActivity() {
 
         //false == male ... true == female
         calculateButton.setOnClickListener {
-            val gender = sexSwitch.isChecked
-            var liftedWeight = inputLiftedWeight.text.toString().toDouble()
-            var bodyWeight = inputBodyweight.text.toString().toDouble()
+            if (TextUtils.isEmpty(inputLiftedWeight.text) || TextUtils.isEmpty(inputBodyweight.text)) {
+                Toast.makeText(this,"Fill both fields", Toast.LENGTH_SHORT).show()
+            } else {
+                val gender = sexSwitch.isChecked
+                var liftedWeight = inputLiftedWeight.text.toString().toDouble()
+                var bodyWeight = inputBodyweight.text.toString().toDouble()
 
-            //if not checked, convert weights to kilos
-            if (!unitSwitch.isChecked) {
-                liftedWeight /= 2.20462
-                bodyWeight /= 2.20462
+                //if not checked, convert weights to kilos
+                if (!unitSwitch.isChecked) {
+                    liftedWeight /= 2.20462
+                    bodyWeight /= 2.20462
+                }
+                displayResult.text = "%.2f".format(calculateWilks(liftedWeight, bodyWeight, gender))
+                Utils.hideKeyboard(this)
             }
-            displayResult.text = "%.2f".format(calculateWilks(liftedWeight, bodyWeight, gender))
-            Utils.hideKeyboard(this)
         }
     }
 

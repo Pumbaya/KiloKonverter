@@ -31,4 +31,6 @@
     <string name="body_weight">Body Weight</string>
     <string name="m">M</string>
     <string name="f">F</string>
+    <string name="split_button">Split</string>
+    <string name="goat__description">Ed Coan Goat Man</string>
 </resources>
