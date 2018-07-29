@@ -1,4 +1,4 @@
-package com.example.pmoayer.kilokonverter
+package com.moayer.puya.kilokonverter
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

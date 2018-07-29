@@ -1,11 +1,13 @@
-package com.example.pmoayer.kilokonverter
+package com.moayer.puya.kilokonverter
 
 
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintSet
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
@@ -34,10 +36,8 @@ class MainActivity : BaseCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(my_toolbar)
-
         //stop soft keyboard from pushing up views
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
 
         //Get user's weight sets and barbell configuration
         val weightSets = Utils.verifyOrCreateSets(this)
